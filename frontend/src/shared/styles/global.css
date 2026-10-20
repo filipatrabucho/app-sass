@@ -1,0 +1,118 @@
+/* Classes partilhadas. Evitar estilos inline e classes avulsas nos componentes. */
+:root {
+  --app-gap: 16px;
+  --app-gap-lg: 24px;
+  --app-header-height: 64px;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+}
+
+/* Layout principal */
+.app-layout {
+  min-height: 100vh;
+}
+
+.app-sider-logo {
+  height: var(--app-header-height);
+  display: flex;
+  align-items: center;
+  padding: 0 var(--app-gap-lg);
+  color: #fff;
+  font-weight: 600;
+  font-size: 16px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--app-gap);
+  padding: 0 var(--app-gap-lg);
+  background: #fff;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.app-header-title {
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.app-content {
+  padding: var(--app-gap-lg);
+}
+
+@media (max-width: 576px) {
+  .app-content {
+    padding: var(--app-gap);
+  }
+  .app-header {
+    padding: 0 var(--app-gap);
+  }
+}
+
+/* Páginas */
+.page-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--app-gap);
+  margin-bottom: var(--app-gap-lg);
+}
+
+.page-header-title {
+  margin: 0;
+}
+
+.page-section {
+  margin-bottom: var(--app-gap-lg);
+}
+
+/* Autenticação */
+.auth-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--app-gap);
+  background: #f5f5f5;
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 400px;
+}
+
+.auth-card-title {
+  text-align: center;
+}
+
+/* Utilitários */
+.full-page-center {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.w-full {
+  width: 100%;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.mb-0 {
+  margin-bottom: 0;
+}

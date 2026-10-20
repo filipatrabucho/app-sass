@@ -1,0 +1,73 @@
+{
+  "app": {
+    "name": "Plataforma RH",
+    "loading": "A carregar…"
+  },
+  "menu": {
+    "portal": "Portal",
+    "backoffice": "Gestão",
+    "home": "Início"
+  },
+  "auth": {
+    "login": {
+      "title": "Iniciar sessão",
+      "email": "Email",
+      "password": "Password",
+      "remember": "Manter sessão iniciada",
+      "submit": "Entrar",
+      "forgot": "Esqueci-me da password"
+    },
+    "forgot": {
+      "title": "Recuperar password",
+      "intro": "Indique o seu email. Se existir uma conta, enviamos um link para definir uma nova password.",
+      "submit": "Enviar link",
+      "sent": "Se o email existir, enviámos um link para definir uma nova password.",
+      "back": "Voltar ao início de sessão"
+    },
+    "reset": {
+      "title": "Definir nova password",
+      "password": "Nova password",
+      "confirm": "Confirmar password",
+      "mismatch": "As passwords não coincidem.",
+      "submit": "Guardar password",
+      "success": "Password alterada. Já pode iniciar sessão."
+    },
+    "logout": "Terminar sessão",
+    "sessionExpired": "A sua sessão expirou. Inicie sessão novamente."
+  },
+  "home": {
+    "title": "Olá, {{name}}",
+    "subtitle": "Bem-vindo(a) — {{tenant}}",
+    "modules": "Módulos disponíveis",
+    "noModules": "Ainda não há módulos ativos para a sua empresa."
+  },
+  "errors": {
+    "moduleUnavailable": {
+      "title": "Módulo não disponível",
+      "subtitle": "Esta funcionalidade não está ativa para a sua empresa. Contacte o administrador."
+    },
+    "notFound": {
+      "title": "Página não encontrada",
+      "subtitle": "A página que procura não existe."
+    },
+    "generic": "Ocorreu um erro. Tente novamente.",
+    "backHome": "Voltar ao início"
+  },
+  "validation": {
+    "required": "Campo obrigatório.",
+    "email": "Email inválido."
+  },
+  "status": {
+    "active": "Ativo",
+    "suspended": "Suspenso",
+    "inactive": "Inativo",
+    "pending": "Pendente",
+    "approved": "Aprovado",
+    "rejected": "Rejeitado",
+    "cancelled": "Cancelado",
+    "cancel_requested": "Cancelamento pedido"
+  },
+  "table": {
+    "total": "{{total}} registos"
+  }
+}

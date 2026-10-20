@@ -1,0 +1,63 @@
+{
+  "app": { "name": "Painel central" },
+  "menu": { "tenants": "Empresas" },
+  "login": { "title": "Painel central" },
+  "tenants": {
+    "title": "Empresas",
+    "subtitle": "Clientes da plataforma, domínios e módulos licenciados.",
+    "new": "Nova empresa",
+    "search": "Pesquisar por nome, NIF ou domínio",
+    "allStatuses": "Todos os estados",
+    "columns": {
+      "name": "Nome",
+      "nif": "NIF",
+      "domain": "Domínio",
+      "status": "Estado",
+      "created_at": "Criada em"
+    },
+    "created": "Empresa criada. Base de dados preparada e administrador criado."
+  },
+  "form": {
+    "company": "Empresa",
+    "name": "Nome",
+    "nif": "NIF",
+    "contact_email": "Email de contacto",
+    "subdomain": "Subdomínio",
+    "subdomainHelp": "Endereço de acesso: {{domain}}",
+    "admin": "Administrador do cliente",
+    "admin_name": "Nome",
+    "admin_email": "Email",
+    "admin_password": "Password inicial",
+    "modules": "Módulos a ativar",
+    "save": "Guardar",
+    "cancel": "Cancelar",
+    "create": "Criar empresa"
+  },
+  "tenant": {
+    "back": "Empresas",
+    "details": "Dados da empresa",
+    "domains": "Domínios",
+    "open": "Abrir",
+    "suspend": "Suspender",
+    "activate": "Reativar",
+    "suspendConfirm": "Suspender esta empresa? Os utilizadores deixam de conseguir entrar (os dados mantêm-se).",
+    "saved": "Alterações guardadas."
+  },
+  "modules": {
+    "title": "Módulos",
+    "help": "Desativar um módulo nunca apaga dados: fica apenas inacessível até ser reativado.",
+    "columns": {
+      "module": "Módulo",
+      "requires": "Depende de",
+      "active": "Ativo",
+      "period": "Período",
+      "max_users": "Máx. utilizadores",
+      "effective": "Em vigor"
+    },
+    "unlimited": "Ilimitado",
+    "yes": "Sim",
+    "no": "Não",
+    "save": "Guardar módulos"
+  },
+  "logout": "Terminar sessão"
+}

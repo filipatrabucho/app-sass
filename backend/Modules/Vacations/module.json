@@ -1,0 +1,9 @@
+{
+    "key": "vacations",
+    "name": "Férias",
+    "description": "Marcação, aprovação e cancelamento de férias, saldos e calendário de equipa.",
+    "version": "1.0.0",
+    "requires": [],
+    "provider": "Modules\\Vacations\\VacationsServiceProvider",
+    "seeder": "Modules\\Vacations\\Database\\Seeders\\VacationsDatabaseSeeder"
+}

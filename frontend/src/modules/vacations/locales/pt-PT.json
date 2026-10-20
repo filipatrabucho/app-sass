@@ -1,0 +1,16 @@
+{
+  "menu": {
+    "my": "As minhas férias"
+  },
+  "my": {
+    "title": "As minhas férias",
+    "subtitle": "Pedidos de férias e respetivo estado.",
+    "empty": "Ainda não tem pedidos de férias."
+  },
+  "fields": {
+    "start_date": "Início",
+    "end_date": "Fim",
+    "business_days": "Dias úteis",
+    "status": "Estado"
+  }
+}
