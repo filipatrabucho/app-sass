@@ -50,21 +50,50 @@ notificações) — ver contas em [`docs/fases/fase-2.md`](docs/fases/fase-2.md)
 > Se o browser não resolver `*.localhost`, adicionar ao `/etc/hosts`:
 > `127.0.0.1 admin.nossaapp.localhost demo.nossaapp.localhost` (e um por cada tenant novo).
 
-## Arranque sem Docker (SQLite + Redis local)
+## Arranque sem Docker (só PHP + Node, com SQLite)
+
+Requisitos: PHP 8.3+ (extensões `pdo_sqlite`, `intl`, `mbstring`, `gd`), Composer e Node 22. Não precisa de
+MariaDB nem de Redis.
 
 ```bash
+# Backend
 cd backend
-cp .env.example .env && php artisan key:generate
-# no .env: DB_DRIVER=sqlite, DB_DATABASE=/caminho/absoluto/backend/database/central.sqlite,
-#          TENANCY_DB_SUFFIX=.sqlite, REDIS_HOST=127.0.0.1, FRONTEND_PORT=5173
+composer install
+cp .env.example .env
+php artisan key:generate
+# Ajustar o .env para SQLite e sem Redis:
+sed -i.bak \
+  -e "s|^DB_DRIVER=.*|DB_DRIVER=sqlite|" \
+  -e "s|^DB_DATABASE=.*|DB_DATABASE=$PWD/database/central.sqlite|" \
+  -e "s|^TENANCY_DB_SUFFIX=.*|TENANCY_DB_SUFFIX=.sqlite|" \
+  -e "s|^SESSION_DRIVER=.*|SESSION_DRIVER=file|" \
+  -e "s|^CACHE_STORE=.*|CACHE_STORE=array|" \
+  -e "s|^QUEUE_CONNECTION=.*|QUEUE_CONNECTION=sync|" \
+  -e "s|^MAIL_MAILER=.*|MAIL_MAILER=log|" \
+  -e "s|^FRONTEND_PORT=.*|FRONTEND_PORT=5173|" .env
 touch database/central.sqlite
-php artisan migrate && php artisan db:seed
-php artisan serve --port=8000
+php artisan migrate
+php artisan db:seed          # admin central + tenant demo com dados falsos
+php artisan serve            # http://127.0.0.1:8000 (deixar a correr)
 
-cd ../frontend && npm install
+# Frontend (noutro terminal)
+cd frontend
+npm install
 VITE_BACKEND_URL=http://127.0.0.1:8000 npm run dev
-# Painel: http://admin.nossaapp.localhost:5173   Tenant: http://demo.nossaapp.localhost:5173
 ```
+
+| O quê | URL | Credenciais |
+|---|---|---|
+| Painel central | http://admin.nossaapp.localhost:5173 | `admin@nossaapp.pt` / `password` |
+| Tenant demo | http://demo.nossaapp.localhost:5173 | `rh@demo.pt`, `chefe.ti@demo.pt`, `colaborador@demo.pt`, `admin@demo.pt` / `password` |
+
+- Usar **Chrome, Edge ou Firefox** (resolvem `*.localhost` sozinhos). No Safari, ou se não abrir, acrescentar ao
+  `/etc/hosts`: `127.0.0.1 admin.nossaapp.localhost demo.nossaapp.localhost`.
+- Os emails (ex.: boas-vindas, recuperar password) ficam em `backend/storage/logs/laravel.log`.
+- Recomeçar do zero: `rm database/*.sqlite && rm -rf storage/tenants && touch database/central.sqlite &&
+  php artisan migrate && php artisan db:seed`.
+- No Windows, editar o `.env` à mão (os mesmos valores) em vez do `sed`, e usar `set VITE_BACKEND_URL=...`
+  antes de `npm run dev` (ou o WSL).
 
 ## Comandos úteis
 
