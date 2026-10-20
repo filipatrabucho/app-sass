@@ -37,10 +37,13 @@ make up          # docker compose up -d --build
 make install     # composer install, key:generate, migrate, seed (admin central + tenant demo)
 ```
 
+O tenant `demo` vem com **dados falsos** (3 departamentos, 15 colaboradores com hierarquia, feriados,
+notificações) — ver contas em [`docs/fases/fase-2.md`](docs/fases/fase-2.md).
+
 | O quê | URL | Credenciais |
 |---|---|---|
 | Painel central | http://admin.nossaapp.localhost:8080 | `admin@nossaapp.pt` / `password` |
-| Tenant demo | http://demo.nossaapp.localhost:8080 | `admin@demo.pt` / `password` |
+| Tenant demo | http://demo.nossaapp.localhost:8080 | `admin@demo.pt`, `rh@demo.pt`, `chefe.ti@demo.pt`, `colaborador@demo.pt` / `password` |
 | Horizon (filas) | http://admin.nossaapp.localhost:8080/horizon | sessão do painel central |
 | Mailpit | http://localhost:8025 | — |
 

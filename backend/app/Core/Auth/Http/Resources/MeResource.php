@@ -3,6 +3,7 @@
 namespace App\Core\Auth\Http\Resources;
 
 use App\Core\Auth\Models\User;
+use App\Core\Employees\Http\Resources\EmployeeResource;
 use App\Core\Licensing\LicenseService;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -25,8 +26,9 @@ class MeResource extends JsonResource
                 'email' => $this->email,
                 'locale' => $this->locale,
             ],
-            // Preenchido na Fase 2 (colaboradores).
-            'employee' => null,
+            'employee' => $this->employee
+                ? (new EmployeeResource($this->employee->load(['department', 'position', 'manager'])->loadCount('subordinates')))->withSensitive()
+                : null,
             'roles' => $this->getRoleNames()->values(),
             'permissions' => $this->getAllPermissions()->pluck('name')->sort()->values(),
             'active_modules' => app(LicenseService::class)->activeModules($tenant),

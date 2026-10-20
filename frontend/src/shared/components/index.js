@@ -2,3 +2,8 @@ export { default as PageHeader } from './PageHeader';
 export { default as StatusTag } from './StatusTag';
 export { default as DataTable } from './DataTable';
 export { default as FullPageLoader } from './FullPageLoader';
+export { default as UserAvatar } from './UserAvatar';
+export { default as EmployeeSelect } from './EmployeeSelect';
+export { default as FileUpload } from './FileUpload';
+export { default as ConfirmDelete } from './ConfirmDelete';
+export { default as ItemList } from './ItemList';

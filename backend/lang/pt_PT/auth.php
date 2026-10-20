@@ -7,4 +7,5 @@ return [
     'logged_in' => 'Sessão iniciada.',
     'unauthenticated' => 'Sessão inválida ou expirada.',
     'forbidden' => 'Não tem permissão para realizar esta ação.',
+    'disabled' => 'A sua conta está desativada.',
 ];

@@ -75,3 +75,38 @@ Formato: contexto → decisão → consequências. Mais recente no fim.
 ## D10 — Testes com SQLite (Fase 1)
 - **Decisão:** os testes Pest correm com a BD central em memória e BDs de tenant em ficheiros SQLite
   (`testing_tenant_*.sqlite`, apagados no fim de cada teste). Não exigem MariaDB/Redis. O Docker usa MariaDB.
+
+## D11 — Auditoria por trait nos models + morph map (Fase 2)
+- **Decisão:** `App\Core\Audit\Concerns\Auditable` regista `created/updated/deleted/restored` em `audit_logs`
+  (diferenças, utilizador, IP). Atributos `$hidden` e `$auditMasked` (ex.: IBAN, password) ficam como `***`.
+  Os tipos polimórficos usam nomes estáveis (`employee`, `user`, `department`…) via `Relation::morphMap`;
+  cada módulo regista os seus no seu provider.
+
+## D12 — Role admin via `Gate::before`; visibilidade por hierarquia (Fase 2)
+- **Decisão:** além de receber todas as permissões no seeder, o role `admin` passa em qualquer `Gate`/policy
+  (`Gate::before`), para não depender de re-seeds quando surgem permissões novas.
+- RH (`core.employees.manage`) vê todos; chefias (`core.employees.view`) só a equipa direta e indireta
+  (via `manager_id`) e **sem** dados sensíveis (NIF, IBAN, morada); todos veem a própria ficha.
+
+## D13 — Ficheiros privados, sempre servidos por controller (Fase 2)
+- **Decisão:** disco `local` isolado por tenant (`storage/tenants/{id}/app`), sem URLs públicas. Fotografias e
+  anexos são servidos por rotas autenticadas. O serviço `FileStorage` é o ponto único (fácil de trocar para S3
+  com prefixo por tenant).
+
+## D14 — Contas de acesso criadas sem password (Fase 2)
+- **Decisão:** ao criar um colaborador com conta, o utilizador recebe uma password aleatória e um email de
+  boas-vindas com link para definir a password (token do broker de reposição). Apagar um colaborador é soft
+  delete e desativa a conta; o middleware `EnsureUserIsActive` termina sessões de contas desativadas.
+
+## D15 — Frontend: fábrica `createResource` e `ItemList` (Fase 2)
+- **Decisão:** `core/store/createResource.js` gera actions/reducer/saga CRUD standard (lista paginada, detalhe,
+  gravar, apagar, refrescar lista) — usado por colaboradores, departamentos, cargos, feriados e auditoria.
+  Ao terminar sessão, todos os recursos são limpos.
+- O `List` do AntD 6 está obsoleto e o substituto (`Listy`) é uma lista virtual com outra API; criámos
+  `shared/components/ItemList` (simples, responsivo).
+- Uploads: o `File` segue na action até à saga (configurado no `serializableCheck`), nunca no estado.
+
+## D16 — Dados de demonstração (Fase 2)
+- **Decisão:** `DemoTenantSeeder` (dados falsos: 3 departamentos, 15 colaboradores com hierarquia e contas,
+  feriados, notificações) corre automaticamente no tenant `demo` do seeder central. Pode ser aplicado a outro
+  tenant vazio com `php artisan tenants:seed --class="Database\Seeders\DemoTenantSeeder" --tenants=<id>`.

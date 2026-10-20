@@ -43,7 +43,7 @@ abstract class ModuleServiceProvider extends ServiceProvider
 
         if (is_file($routes) && ! $this->app->routesAreCached()) {
             Route::prefix('api')
-                ->middleware([...TenantRoutes::apiMiddleware(), 'auth:sanctum', 'module:'.$this->moduleKey()])
+                ->middleware([...TenantRoutes::apiMiddleware(), ...TenantRoutes::authMiddleware(), 'module:'.$this->moduleKey()])
                 ->group($routes);
         }
 

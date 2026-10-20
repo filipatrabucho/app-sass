@@ -1,6 +1,9 @@
 import { useEffect, useMemo, useState } from 'react';
-import { Avatar, Button, Dropdown, Grid, Layout, Menu } from 'antd';
-import { HomeOutlined, LogoutOutlined, MenuOutlined, UserOutlined } from '@ant-design/icons';
+import { Button, Dropdown, Grid, Layout, Menu, Space } from 'antd';
+import { LogoutOutlined, MenuOutlined, UserOutlined } from '@ant-design/icons';
+import { UserAvatar } from '@/shared/components';
+import NotificationBell from '../hr/components/NotificationBell';
+import coreMenu from '../hr/menu';
 import { useDispatch, useSelector } from 'react-redux';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
@@ -20,8 +23,9 @@ function useMenuItems() {
   const loaded = useSelector((state) => state.app.loadedModules);
 
   return useMemo(() => {
+    // Core primeiro; os módulos são inseridos antes dos itens de gestão do core.
     const entries = [
-      { key: '/', path: '/', label: t('menu.home'), icon: HomeOutlined, area: 'portal' },
+      ...coreMenu,
       ...getModules(activeModules.filter((k) => loaded.includes(k))).flatMap((m) => m.menu || []),
     ].filter((item) => can(item.permission));
 
@@ -49,6 +53,7 @@ export default function AppLayout() {
   const isMobile = !screens.lg;
   const [collapsed, setCollapsed] = useState(false);
   const user = useSelector(selectUser);
+  const employee = useSelector((state) => state.auth.employee);
   const tenant = useSelector(selectTenant);
   const moduleUnavailable = useSelector((state) => state.app.moduleUnavailable);
   const items = useMenuItems();
@@ -68,8 +73,12 @@ export default function AppLayout() {
       .sort((a, b) => b.length - a.length)[0] || '/';
 
   const userMenu = {
-    items: [{ key: 'logout', icon: <LogoutOutlined />, label: t('auth.logout') }],
-    onClick: ({ key }) => key === 'logout' && dispatch(logoutRequest()),
+    items: [
+      { key: 'profile', icon: <UserOutlined />, label: t('menu.profile') },
+      { type: 'divider' },
+      { key: 'logout', icon: <LogoutOutlined />, label: t('auth.logout') },
+    ],
+    onClick: ({ key }) => (key === 'logout' ? dispatch(logoutRequest()) : navigate('/perfil')),
   };
 
   return (
@@ -99,11 +108,15 @@ export default function AppLayout() {
         <Layout.Header className="app-header">
           <Button type="text" icon={<MenuOutlined />} onClick={() => setCollapsed((c) => !c)} />
           <span className="app-header-title">{tenant?.name}</span>
-          <Dropdown menu={userMenu} trigger={['click']}>
-            <Button type="text" icon={<Avatar size="small" icon={<UserOutlined />} />}>
-              {!isMobile && user?.name}
-            </Button>
-          </Dropdown>
+          <Space size="small">
+            <NotificationBell />
+            <Dropdown menu={userMenu} trigger={['click']}>
+              <Button type="text" className="header-user">
+                <UserAvatar size="small" name={user?.name} src={employee?.avatar_url} />
+                {!isMobile && user?.name}
+              </Button>
+            </Dropdown>
+          </Space>
         </Layout.Header>
         <Layout.Content className="app-content">
           <Outlet />

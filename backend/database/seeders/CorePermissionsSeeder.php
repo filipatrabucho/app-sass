@@ -6,7 +6,7 @@ use Database\Seeders\Concerns\SeedsPermissions;
 use Illuminate\Database\Seeder;
 
 /**
- * Permissões do Core. Crescem na Fase 2 (colaboradores, departamentos, feriados...).
+ * Permissões do Core ({modulo}.{recurso}.{acao}). O admin tem todas (ver Gate::before).
  */
 class CorePermissionsSeeder extends Seeder
 {
@@ -16,6 +16,13 @@ class CorePermissionsSeeder extends Seeder
     {
         $this->seedPermissions([
             'core.settings.manage' => [],
+            'core.users.manage' => [],
+            'core.audit.view' => [],
+            'core.employees.view' => ['manager', 'hr'],
+            'core.employees.manage' => ['hr'],
+            'core.departments.manage' => ['hr'],
+            'core.positions.manage' => ['hr'],
+            'core.holidays.manage' => ['hr'],
         ]);
     }
 }

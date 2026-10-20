@@ -23,7 +23,7 @@ class DatabaseSeeder extends Seeder
         );
 
         if (! Domain::query()->where('domain', TenantProvisioner::domainFor('demo'))->exists()) {
-            $provisioner->create([
+            $tenant = $provisioner->create([
                 'name' => 'Empresa Demo, Lda.',
                 'nif' => '500000000',
                 'contact_email' => 'rh@demo.pt',
@@ -31,6 +31,9 @@ class DatabaseSeeder extends Seeder
                 'admin' => ['name' => 'Admin Demo', 'email' => 'admin@demo.pt', 'password' => 'password'],
                 'modules' => ['vacations'],
             ]);
+
+            // Dados falsos para validação (colaboradores, hierarquia, feriados, notificações).
+            $tenant->run(fn () => $this->call(DemoTenantSeeder::class));
         }
 
         $this->command?->info('Tenant demo: http://'.TenantProvisioner::domainFor('demo').' (admin@demo.pt / password)');

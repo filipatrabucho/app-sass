@@ -5,10 +5,12 @@ namespace Tests;
 use App\Central\Models\CentralAdmin;
 use App\Central\Services\TenantProvisioner;
 use App\Core\Auth\Models\User;
+use App\Core\Employees\Models\Employee;
 use App\Core\Tenancy\Models\Tenant;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 use Illuminate\Support\Facades\Artisan;
+use Laravel\Sanctum\Sanctum;
 
 abstract class TestCase extends BaseTestCase
 {
@@ -29,6 +31,9 @@ abstract class TestCase extends BaseTestCase
 
         foreach (glob(database_path(config('tenancy.database.prefix').'*')) ?: [] as $file) {
             @unlink($file);
+        }
+        if ($this->app !== null) {
+            $this->app['files']->deleteDirectory(storage_path('tenants'));
         }
 
         parent::tearDown();
@@ -77,6 +82,24 @@ abstract class TestCase extends BaseTestCase
     protected function tenantUser(Tenant $tenant, string $email): User
     {
         return $tenant->run(fn () => User::where('email', $email)->firstOrFail());
+    }
+
+    /**
+     * Cria (no tenant) um utilizador com role e ficha de colaborador e autentica-o via Sanctum.
+     */
+    protected function actingAsRole(Tenant $tenant, string $role, array $employee = []): User
+    {
+        $user = $tenant->run(function () use ($role, $employee) {
+            $user = User::factory()->create();
+            $user->assignRole($role);
+            Employee::factory()->create(['user_id' => $user->id, 'email' => $user->email, ...$employee]);
+
+            return $user->load('employee');
+        });
+
+        Sanctum::actingAs($user);
+
+        return $user;
     }
 
     protected function actingAsCentralAdmin(): static

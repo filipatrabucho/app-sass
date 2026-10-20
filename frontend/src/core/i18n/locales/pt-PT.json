@@ -6,7 +6,14 @@
   "menu": {
     "portal": "Portal",
     "backoffice": "Gestão",
-    "home": "Início"
+    "home": "Início",
+    "profile": "O meu perfil",
+    "notifications": "Notificações",
+    "holidays": "Feriados",
+    "employees": "Colaboradores",
+    "departments": "Departamentos",
+    "positions": "Cargos",
+    "audit": "Auditoria"
   },
   "auth": {
     "login": {
@@ -39,7 +46,19 @@
     "title": "Olá, {{name}}",
     "subtitle": "Bem-vindo(a) — {{tenant}}",
     "modules": "Módulos disponíveis",
-    "noModules": "Ainda não há módulos ativos para a sua empresa."
+    "noModules": "Ainda não há módulos ativos para a sua empresa.",
+    "myInfo": "A minha ficha",
+    "department": "Departamento",
+    "position": "Cargo",
+    "manager": "Chefia",
+    "hireDate": "Data de admissão",
+    "noEmployee": "O seu utilizador ainda não está associado a uma ficha de colaborador.",
+    "upcomingHolidays": "Próximos feriados",
+    "noHolidays": "Sem feriados nos próximos meses.",
+    "unread": "Notificações por ler",
+    "team": "A minha equipa",
+    "teamCount": "{{count}} pessoas",
+    "seeAll": "Ver todas"
   },
   "errors": {
     "moduleUnavailable": {
@@ -69,5 +88,188 @@
   },
   "table": {
     "total": "{{total}} registos"
+  },
+  "shared": {
+    "employeeSelect": {
+      "placeholder": "Pesquisar colaborador",
+      "empty": "Sem resultados"
+    },
+    "upload": "Carregar ficheiro",
+    "fileTooLarge": "O ficheiro excede o tamanho máximo ({{max}} MB).",
+    "confirmDelete": "Tem a certeza que quer apagar?",
+    "delete": "Apagar",
+    "cancel": "Cancelar",
+    "save": "Guardar",
+    "edit": "Editar",
+    "create": "Criar",
+    "saved": "Alterações guardadas.",
+    "created": "Registo criado.",
+    "deleted": "Registo apagado.",
+    "actions": "Ações",
+    "search": "Pesquisar",
+    "all": "Todos",
+    "yes": "Sim",
+    "no": "Não",
+    "back": "Voltar",
+    "download": "Descarregar"
+  },
+  "profile": {
+    "title": "O meu perfil",
+    "subtitle": "Os seus dados pessoais e de contacto.",
+    "photo": "Fotografia",
+    "changePhoto": "Alterar fotografia",
+    "photoHelp": "JPG, PNG ou WEBP até 2 MB.",
+    "organization": "Na empresa",
+    "contacts": "Contactos e dados pessoais",
+    "readonlyHelp": "Os dados contratuais são geridos pelos Recursos Humanos.",
+    "language": "Idioma",
+    "saved": "Perfil atualizado."
+  },
+  "employees": {
+    "title": "Colaboradores",
+    "subtitle": "Fichas, hierarquia e contas de acesso.",
+    "new": "Novo colaborador",
+    "edit": "Editar colaborador",
+    "searchPlaceholder": "Nome, email ou número",
+    "allDepartments": "Todos os departamentos",
+    "allStatuses": "Todos os estados",
+    "sections": {
+      "personal": "Dados pessoais",
+      "organization": "Organização",
+      "access": "Acesso à plataforma",
+      "address": "Morada"
+    },
+    "fields": {
+      "employee_number": "N.º",
+      "full_name": "Nome",
+      "first_name": "Nome próprio",
+      "last_name": "Apelido",
+      "email": "Email",
+      "phone": "Telefone",
+      "nif": "NIF",
+      "birth_date": "Data de nascimento",
+      "iban": "IBAN",
+      "street": "Rua",
+      "postal_code": "Código postal",
+      "city": "Localidade",
+      "country": "País",
+      "department": "Departamento",
+      "position": "Cargo",
+      "manager": "Chefia",
+      "hire_date": "Data de admissão",
+      "status": "Estado",
+      "role": "Perfil de acesso",
+      "create_account": "Criar conta de acesso",
+      "account_active": "Conta ativa",
+      "last_login": "Último acesso",
+      "team": "Equipa"
+    },
+    "createAccountHelp": "É enviado um email para o colaborador definir a password.",
+    "noAccount": "Sem conta de acesso",
+    "roles": {
+      "admin": "Administrador",
+      "hr": "Recursos Humanos",
+      "manager": "Chefia",
+      "employee": "Colaborador"
+    },
+    "tabs": {
+      "details": "Ficha",
+      "documents": "Documentos",
+      "team": "Equipa"
+    },
+    "documents": {
+      "empty": "Sem documentos.",
+      "upload": "Anexar documento",
+      "size": "Tamanho",
+      "uploadedBy": "Carregado por",
+      "date": "Data"
+    },
+    "teamEmpty": "Sem subordinados diretos.",
+    "deleteConfirm": "Apagar este colaborador? A conta de acesso é desativada; o histórico mantém-se.",
+    "created": "Colaborador criado.",
+    "updated": "Colaborador atualizado."
+  },
+  "departments": {
+    "title": "Departamentos",
+    "subtitle": "Estrutura da empresa e responsáveis.",
+    "new": "Novo departamento",
+    "edit": "Editar departamento",
+    "fields": {
+      "name": "Nome",
+      "parent": "Departamento superior",
+      "manager": "Responsável",
+      "employees": "Colaboradores"
+    },
+    "noParent": "(nenhum — topo)"
+  },
+  "positions": {
+    "title": "Cargos",
+    "subtitle": "Funções usadas nas fichas dos colaboradores.",
+    "new": "Novo cargo",
+    "edit": "Editar cargo",
+    "fields": {
+      "name": "Nome",
+      "employees": "Colaboradores"
+    }
+  },
+  "holidays": {
+    "title": "Feriados",
+    "subtitle": "Feriados considerados no cálculo de dias úteis.",
+    "new": "Novo feriado",
+    "edit": "Editar feriado",
+    "importNational": "Importar feriados nacionais de {{year}}",
+    "year": "Ano",
+    "fields": {
+      "date": "Data",
+      "weekday": "Dia",
+      "name": "Nome",
+      "type": "Tipo",
+      "region": "Concelho",
+      "recurring": "Repete todos os anos"
+    },
+    "types": {
+      "national": "Nacional",
+      "municipal": "Municipal",
+      "company": "Empresa"
+    }
+  },
+  "notifications": {
+    "title": "Notificações",
+    "subtitle": "Avisos e pedidos que lhe dizem respeito.",
+    "markAll": "Marcar todas como lidas",
+    "markRead": "Marcar como lida",
+    "empty": "Não tem notificações.",
+    "open": "Abrir",
+    "unreadOnly": "Só por ler",
+    "recent": "Recentes"
+  },
+  "audit": {
+    "title": "Auditoria",
+    "subtitle": "Histórico de alterações a dados da empresa.",
+    "fields": {
+      "date": "Data",
+      "user": "Utilizador",
+      "action": "Ação",
+      "entity": "Entidade",
+      "id": "ID",
+      "ip": "IP",
+      "field": "Campo",
+      "before": "Antes",
+      "after": "Depois"
+    },
+    "actions": {
+      "created": "Criado",
+      "updated": "Alterado",
+      "deleted": "Apagado",
+      "restored": "Reposto"
+    },
+    "entities": {
+      "user": "Utilizador",
+      "employee": "Colaborador",
+      "department": "Departamento",
+      "position": "Cargo",
+      "holiday": "Feriado"
+    },
+    "system": "Sistema"
   }
 }

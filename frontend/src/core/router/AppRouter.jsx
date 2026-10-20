@@ -11,6 +11,7 @@ import HomePage from '../pages/HomePage';
 import ResultPage from '../pages/ResultPage';
 import { getInactiveModulePaths, getModules } from '../modules/registry';
 import usePermission from '../permissions/usePermission';
+import coreRoutes from '../hr/routes';
 
 function RequireAuth({ children }) {
   const status = useSelector(selectAuthStatus);
@@ -36,9 +37,10 @@ export default function AppRouter() {
   // Só os módulos ativos E carregados geram rotas (os componentes de página são lazy).
   const moduleRoutes = useMemo(
     () =>
-      getModules(activeModules.filter((k) => loaded.includes(k)))
-        .flatMap((m) => m.routes || [])
-        .filter((r) => can(r.permission)),
+      [
+        ...coreRoutes,
+        ...getModules(activeModules.filter((k) => loaded.includes(k))).flatMap((m) => m.routes || []),
+      ].filter((r) => can(r.permission)),
     [activeModules, loaded, can],
   );
 

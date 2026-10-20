@@ -19,5 +19,5 @@ return [
     'logged_in' => 'Logged in.',
     'unauthenticated' => 'Invalid or expired session.',
     'forbidden' => 'You are not allowed to perform this action.',
-
+    'disabled' => 'Your account is disabled.',
 ];
